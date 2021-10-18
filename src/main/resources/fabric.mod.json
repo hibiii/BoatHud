@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "hibi.boathud.ExampleMod"
+      "hibi.boathud.Common"
     ]
   },
   "mixins": [

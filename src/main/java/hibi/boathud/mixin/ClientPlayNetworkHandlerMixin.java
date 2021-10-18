@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import hibi.boathud.Common;
+import hibi.boathud.Common.HudData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.MessageType;
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
-import net.minecraft.text.Text;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
@@ -28,6 +28,6 @@ public class ClientPlayNetworkHandlerMixin {
 		)
 	)
 	private void checkBoatEntry(EntityPassengersSetS2CPacket packet, CallbackInfo info) {
-		this.client.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of(this.client.player.getEntityName() + " entered " + this.client.world.getEntityById(packet.getId()).getEntityName()), this.client.player.getUuid());
+		Common.data = new HudData();
 	}
 }
