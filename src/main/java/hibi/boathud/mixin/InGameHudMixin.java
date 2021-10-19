@@ -17,10 +17,11 @@ public class InGameHudMixin {
 	)
 	public void render(MatrixStack stack, float tickDelta, CallbackInfo info) {
 		if(Common.ridingBoat) {
-			stack.push();
-			Common.client.textRenderer.drawWithShadow(stack, Double.toString(Common.hudData.speed), 1, 1, 0xFFFFFF);
-			Common.client.textRenderer.drawWithShadow(stack, Common.hudData.name, 1, 18, 0xFFFFFF);
-			stack.pop();
+			// stack.push();
+			// Common.client.textRenderer.drawWithShadow(stack, Double.toString(Common.hudData.speed), 1, 1, 0xFFFFFF);
+			// Common.client.textRenderer.drawWithShadow(stack, Common.hudData.name, 1, 18, 0xFFFFFF);
+			Common.hudRenderer.render(stack);
+			// stack.pop();
 		}
 	}
 }

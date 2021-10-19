@@ -12,6 +12,7 @@ public class Common implements ClientModInitializer {
 	public static HudData hudData;
 	public static MinecraftClient client = null;
 	public static boolean ridingBoat = false;
+	public static HudRenderer hudRenderer;
 
 	@Override
 	public void onInitializeClient() {
