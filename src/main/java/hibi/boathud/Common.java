@@ -4,33 +4,26 @@ package hibi.boathud;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.vehicle.BoatEntity;
 
 public class Common implements ClientModInitializer {
 	//public static final Logger LOGGER = LogManager.getLogger("modid");
 
-	public static HudData data;
-	public static MinecraftClient client = MinecraftClient.getInstance();
+	public static HudData hudData;
+	public static MinecraftClient client = null;
+	public static boolean ridingBoat = false;
 
 	@Override
 	public void onInitializeClient() {
-		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			if(client.world.getTime() % 10 != 0) return;
+		client = MinecraftClient.getInstance();
+		ClientTickEvents.END_WORLD_TICK.register(clientWorld -> {
+			if(client.world.getTime() % 5 != 0) return;
+			if(client.player.getVehicle() instanceof BoatEntity) {
+				hudData.update();
+			}
+			else if (ridingBoat) {
+				ridingBoat = false;
+			}
 		});
-	}
-
-	public static class HudData {
-		public double speed;
-		public double g;
-		public double angleDiff;
-		public boolean left;
-		public boolean right;
-		public boolean throttle;
-		public boolean brake;
-		public int ping;
-		public final String name;
-		
-		public HudData(){
-			this.name = Common.client.player.getEntityName();
-		}
 	}
 }
