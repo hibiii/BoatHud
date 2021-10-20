@@ -17,8 +17,9 @@ public class Common implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		client = MinecraftClient.getInstance();
+		hudRenderer = new HudRenderer(client);
 		ClientTickEvents.END_WORLD_TICK.register(clientWorld -> {
-			if(client.world.getTime() % 5 != 0) return;
+			if(client.player == null) return;
 			if(client.player.getVehicle() instanceof BoatEntity) {
 				hudData.update();
 			}

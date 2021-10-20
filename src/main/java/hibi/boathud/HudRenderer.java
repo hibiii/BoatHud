@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
@@ -38,6 +37,8 @@ extends DrawableHelper {
 		// Overlay texture and bar //
 		this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 67, 182, 30);
 		this.renderBar(stack, i - 91, this.scaledHeight - 82);
+
+		this.client.textRenderer.drawWithShadow(stack, Double.toString(Common.hudData.angleDiff), i - 90, this.scaledHeight - 76, 0xFFFFFF);
 		RenderSystem.disableBlend();
 		// this.setZOffset(oldZOffset);
 	}
@@ -51,6 +52,6 @@ extends DrawableHelper {
 			this.drawTexture(stack, x, y, 0, 5, 182, 5);
 			return;
 		}
-		this.drawTexture(stack, x, y, 0, 5, (int)(Common.hudData.speed * SCALE_V[barType]), 5);
+		this.drawTexture(stack, x, y, 0, 5, (int)((Common.hudData.speed - MIN_V[barType]) * SCALE_V[barType]), 5);
 	}
 }

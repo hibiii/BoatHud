@@ -1,6 +1,8 @@
 package hibi.boathud;
 
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class HudData {
 	public double speed;
@@ -19,6 +21,9 @@ public class HudData {
 
 	public void update() {
 		BoatEntity boat = (BoatEntity)Common.client.player.getVehicle();
-		this.speed = boat.getVelocity().multiply(1, 0, 1).length() * 20;
+		Vec3d velocity = boat.getVelocity().multiply(1, 0, 1);
+		this.speed = velocity.length() * 20;
+		this.angleDiff = Math.toDegrees(Math.acos(velocity.dotProduct(boat.getRotationVector()) / velocity.length() * boat.getRotationVector().length()));
+		if(Double.isNaN(this.angleDiff)) this.angleDiff = 0;
 	}
 }
