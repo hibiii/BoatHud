@@ -4,19 +4,19 @@
   "version": "${version}",
 
   "name": "BoatHud",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "This mod adds a racing style HUD, configurable, for riding a boat, and is designed mostly for racing boats on ice.",
   "authors": [
     "hibi"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Hibiii/BoatHud",
+    "issues": "https://github.com/Hibiii/BoatHud/issues"
   },
 
   "license": "Unlicense",
   "icon": "assets/boathud/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "hibi.boathud.Common"
@@ -25,11 +25,18 @@
   "mixins": [
     "boathud.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": ">=1.17",
     "java": ">=16"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.github_releases": "https://github.com/Hibiii/BoatHud/releases",
+        "modmenu.discord": "https://discord.gg/Zef3c27dN2"
+      }
+    }
   }
 }
