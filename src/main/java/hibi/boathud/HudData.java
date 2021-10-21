@@ -14,7 +14,8 @@ public class HudData {
 	public boolean brake;
 	public int ping;
 	public final String name;
-	
+	private double oldSpeed;
+
 	public HudData(){
 		this.name = Common.client.player.getEntityName();
 	}
@@ -22,8 +23,10 @@ public class HudData {
 	public void update() {
 		BoatEntity boat = (BoatEntity)Common.client.player.getVehicle();
 		Vec3d velocity = boat.getVelocity().multiply(1, 0, 1);
+		this.oldSpeed = this.speed;
 		this.speed = velocity.length() * 20;
 		this.angleDiff = Math.toDegrees(Math.acos(velocity.dotProduct(boat.getRotationVector()) / velocity.length() * boat.getRotationVector().length()));
 		if(Double.isNaN(this.angleDiff)) this.angleDiff = 0;
+		this.g = MathHelper.lerp(0.2, speed - oldSpeed, 0);
 	}
 }
