@@ -36,11 +36,12 @@ extends DrawableHelper {
 		// Overlay texture and bar //
 		this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 67, 182, 30);
 		this.renderBar(stack, i - 91, this.scaledHeight - 82);
+		this.renderPing(stack, i + 76 - Common.hudData.nameLen, this.scaledHeight - 65);
 
 		this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
 		this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i, this.scaledHeight - 76, 0xFFFFFF);
 		this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
-		this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 89 - this.client.textRenderer.getWidth(Common.hudData.name), this.scaledHeight - 65, 0xFFFFFF);
+		this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 89 - Common.hudData.nameLen, this.scaledHeight - 65, 0xFFFFFF);
 		RenderSystem.disableBlend();
 	}
 
@@ -53,6 +54,29 @@ extends DrawableHelper {
 			return;
 		}
 		this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)((Common.hudData.speed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+	}
+
+	private void renderPing(MatrixStack stack, int x, int y) {
+		int offset = 0;
+		if(Common.hudData.ping < 0) {
+			offset = 40;
+		}
+		else if(Common.hudData.ping < 150) {
+			offset = 0;
+		}
+		else if(Common.hudData.ping < 300) {
+			offset = 8;
+		}
+		else if(Common.hudData.ping < 600) {
+			offset = 16;
+		}
+		else if(Common.hudData.ping < 1000) {
+			offset = 24;
+		}
+		else {
+			offset = 32;
+		}
+		this.drawTexture(stack, x, y, 246, offset, 10, 8);
 	}
 
 	private void typeCentered(MatrixStack stack, String text, int centerX, int y, int color) {
