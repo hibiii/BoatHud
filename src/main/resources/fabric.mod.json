@@ -20,6 +20,9 @@
   "entrypoints": {
     "client": [
       "hibi.boathud.Common"
+    ],
+    "modmenu": [
+      "hibi.boathud.MenuInteg"
     ]
   },
   "mixins": [

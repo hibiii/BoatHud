@@ -1,4 +1,21 @@
 {
 	"modmenu.descriptionTranslation.boathud": "This mod adds a racing style HUD, configurable, for riding a boat, and is designed mostly for racing boats on ice.",
-	"modmenu.summaryTranslation.boathud": "Sailing fast in style!"
+	"modmenu.summaryTranslation.boathud": "Sailing fast in style!",
+	"boathud.config.title": "BoatHud Options",
+	"boathud.option.enabled": "Enabled",
+	"boathud.option.extended": "Extended HUD",
+	"boathud.option.speed_format": "Speed units",
+	"boathud.option.speed_format.MS": "m/s",
+	"boathud.option.speed_format.KMPH": "km/h",
+	"boathud.option.speed_format.MPH": "mph",
+	"boathud.option.speed_format.KT": "kt",
+	"boathud.option.bar_type": "Speed bar type",
+	"boathud.option.bar_type.PACKED": "Water & Packed Ice",
+	"boathud.option.bar_type.MIXED": "Mixed ices",
+	"boathud.option.bar_type.BLUE": "Blue ice",
+	"boathud.tooltip.extended": "Enables acceleration meter and input display",
+	"boathud.tooltip.bar_type": "Change the display and behavior of the speed bar:",
+	"boathud.tooltip.bar_type.packed": "Water & Packed: Best for low speeds.",
+	"boathud.tooltip.bar_type.mixed": "Mixed: Best for running on any kind of ice.",
+	"boathud.tooltip.bar_type.blue": "Blue: Suitable mostly for blue ice racing."
 }
