@@ -33,21 +33,28 @@ extends DrawableHelper {
 		RenderSystem.defaultBlendFunc();
 
 		int i = this.scaledWidth / 2;
-		// Overlay texture and bar //
-		this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 67, 182, 30);
-		this.renderBar(stack, i - 91, this.scaledHeight - 82);
-		// Ping //
-		this.renderPing(stack, i + 76 - Common.hudData.nameLen, this.scaledHeight - 65);
-		// Controls //
-		this.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.keyForward.isPressed() ? 45 : 40, 61, 5);
-		this.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.keyBack.isPressed() ? 35 : 30, 61, 5);
-		this.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.keyLeft.isPressed() ? 38 : 30, 17, 8);
-		this.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.keyRight.isPressed() ? 38 : 30, 17, 8);
+		if(Config.extended) {
+			// Overlay texture and bar //
+			this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 67, 182, 30);
+			this.renderBar(stack, i - 91, this.scaledHeight - 82);
+			// Ping //
+			this.renderPing(stack, i + 76 - Common.hudData.nameLen, this.scaledHeight - 65);
+			// Controls //
+			this.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.keyForward.isPressed() ? 45 : 40, 61, 5);
+			this.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.keyBack.isPressed() ? 35 : 30, 61, 5);
+			this.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.keyLeft.isPressed() ? 38 : 30, 17, 8);
+			this.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.keyRight.isPressed() ? 38 : 30, 17, 8);
 
-		this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-		this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i, this.scaledHeight - 76, 0xFFFFFF);
-		this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
-		this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 89 - Common.hudData.nameLen, this.scaledHeight - 65, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 89 - Common.hudData.nameLen, this.scaledHeight - 65, 0xFFFFFF);
+		} else {
+			this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 50, 182, 17);
+			this.renderBar(stack, i - 91, this.scaledHeight - 82);
+			this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+		}
 		RenderSystem.disableBlend();
 	}
 

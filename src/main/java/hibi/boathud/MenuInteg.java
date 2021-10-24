@@ -17,14 +17,14 @@ public class MenuInteg implements ModMenuApi {
 				.setTitle(TITLE);
 			ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 			builder.getOrCreateCategory(CAT)
-				.addEntry(entryBuilder.startBooleanToggle(ENABLED, Config.extended)
+				.addEntry(entryBuilder.startBooleanToggle(ENABLED, Config.enabled)
 					.setDefaultValue(true)
-					.setSaveConsumer(newVal -> Config.extended = newVal)
+					.setSaveConsumer(newVal -> Config.enabled = newVal)
 					.build())
-				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.enabled)
+				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.extended)
 					.setDefaultValue(true)
 					.setTooltip(TIP_EXTENDED)
-					.setSaveConsumer(newVal -> Config.enabled = newVal)
+					.setSaveConsumer(newVal -> Config.extended = newVal)
 					.build())
 				.addEntry(entryBuilder.startEnumSelector(SPEED_FORMAT, SpeedFormat.class, SpeedFormat.values()[Config.configSpeedType])
 					.setDefaultValue(SpeedFormat.KMPH)
