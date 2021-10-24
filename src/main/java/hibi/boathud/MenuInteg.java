@@ -28,28 +28,7 @@ public class MenuInteg implements ModMenuApi {
 					.build())
 				.addEntry(entryBuilder.startEnumSelector(SPEED_FORMAT, SpeedFormat.class, SpeedFormat.values()[Config.configSpeedType])
 					.setDefaultValue(SpeedFormat.KMPH)
-					.setSaveConsumer(newVal -> {switch (newVal){
-						case MS:
-							Config.speedRate = 1d;
-							Config.speedFormat = "%03.0f m/s";
-							Config.configSpeedType = 0;
-							break;
-						case KMPH:
-							Config.speedRate = 3.6d;
-							Config.speedFormat = "%03.0f km/h";
-							Config.configSpeedType = 1;
-							break;
-						case MPH:
-							Config.speedRate = 2.236936d;
-							Config.speedFormat = "%03.0f mph";
-							Config.configSpeedType = 2;
-							break;
-						case KT:
-							Config.speedRate = 1.943844d;
-							Config.speedFormat = "%03.0f kt";
-							Config.configSpeedType = 3;
-							break;
-						}})
+					.setSaveConsumer(newVal -> Config.setUnit(newVal.ordinal()))
 					.setEnumNameProvider(value -> new TranslatableText("boathud.option.speed_format." + value.toString()))
 					.build())
 				.addEntry(entryBuilder.startEnumSelector(BAR_TYPE, BarType.class, BarType.values()[Config.barType])
@@ -58,6 +37,7 @@ public class MenuInteg implements ModMenuApi {
 					.setSaveConsumer(newVal -> Config.barType = newVal.ordinal())
 					.setEnumNameProvider(value -> new TranslatableText("boathud.option.bar_type." + value.toString()))
 					.build());
+			builder.setSavingRunnable(() -> Config.save());
 			return builder.build();
 		};
 	}
