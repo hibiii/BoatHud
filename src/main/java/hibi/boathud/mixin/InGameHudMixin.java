@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import hibi.boathud.Common;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.util.math.MatrixStack;
 
 @Mixin(InGameHud.class)
@@ -16,7 +17,7 @@ public class InGameHudMixin {
 		at = @At("TAIL")
 	)
 	public void render(MatrixStack stack, float tickDelta, CallbackInfo info) {
-		if(Common.ridingBoat) {
+		if(Common.ridingBoat && !(Common.client.currentScreen instanceof ChatScreen)) {
 			Common.hudRenderer.render(stack);
 		}
 	}
