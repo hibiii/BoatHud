@@ -1,0 +1,21 @@
+{
+	"modmenu.descriptionTranslation.boathud": "Этот мод добавляет настраиваемый HUD в гоночном стиле, предназначенный для плавания на лодке и гонок на льду.",
+	"modmenu.summaryTranslation.boathud": "Быстрое стильное плавание!",
+	"boathud.config.title": "Настройки BoatHud",
+	"boathud.option.enabled": "Включён",
+	"boathud.option.extended": "Расширенный вид",
+	"boathud.option.speed_format": "Единицы измерения",
+	"boathud.option.speed_format.MS": "м/с",
+	"boathud.option.speed_format.KMPH": "км/ч",
+	"boathud.option.speed_format.MPH": "миль/ч",
+	"boathud.option.speed_format.KT": "узлы",
+	"boathud.option.bar_type": "Тип шкалы скорости",
+	"boathud.option.bar_type.PACKED": "Вода и плотный лёд",
+	"boathud.option.bar_type.MIXED": "Смешанный",
+	"boathud.option.bar_type.BLUE": "Синий лёд",
+	"boathud.tooltip.extended": "Включает акселерометр и отображение нажатий",
+	"boathud.tooltip.bar_type": "Изменяет оформление и поведение панели скорости:",
+	"boathud.tooltip.bar_type.packed": "Вода и плотный лёд: хорош для низких скоростей.",
+	"boathud.tooltip.bar_type.mixed": "Смешанный: хорошо подходит для любого вида льда.",
+	"boathud.tooltip.bar_type.blue": "Синий лёд: больше подходит для гонок на синем льду."
+}
