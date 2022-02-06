@@ -35,10 +35,10 @@ extends DrawableHelper {
 		int i = this.scaledWidth / 2;
 		if(Config.extended) {
 			// Overlay texture and bar //
-			this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 67, 182, 30);
-			this.renderBar(stack, i - 91, this.scaledHeight - 82);
+			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
+			this.renderBar(stack, i - 91, this.scaledHeight - 83);
 			// Ping //
-			this.renderPing(stack, i + 76 - Common.hudData.nameLen, this.scaledHeight - 65);
+			this.renderPing(stack, i + 75 - Common.hudData.nameLen, this.scaledHeight - 65);
 			// Controls //
 			this.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.keyForward.isPressed() ? 45 : 40, 61, 5);
 			this.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.keyBack.isPressed() ? 35 : 30, 61, 5);
@@ -48,10 +48,10 @@ extends DrawableHelper {
 			this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
 			this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i, this.scaledHeight - 76, 0xFFFFFF);
 			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 89 - Common.hudData.nameLen, this.scaledHeight - 65, 0xFFFFFF);
+			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 88 - Common.hudData.nameLen, this.scaledHeight - 65, 0xFFFFFF);
 		} else {
-			this.drawTexture(stack, i - 91, this.scaledHeight - 82, 0, 50, 182, 17);
-			this.renderBar(stack, i - 91, this.scaledHeight - 82);
+			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 50, 182, 20);
+			this.renderBar(stack, i - 91, this.scaledHeight - 83);
 			this.typeCentered(stack, String.format(Config.speedFormat, Common.hudData.speed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
 			this.typeCentered(stack, String.format(Config.diffFormat, Common.hudData.angleDiff), i + 58, this.scaledHeight - 76, 0xFFFFFF);
 		}
