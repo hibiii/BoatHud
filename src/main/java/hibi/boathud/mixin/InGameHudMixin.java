@@ -19,7 +19,7 @@ public class InGameHudMixin {
 	)
 	public void render(MatrixStack stack, float tickDelta, CallbackInfo info) {
 		if(Config.enabled && Common.ridingBoat && !(Common.client.currentScreen instanceof ChatScreen)) {
-			Common.hudRenderer.render(stack);
+			Common.hudRenderer.render(stack, tickDelta);
 		}
 	}
 }
