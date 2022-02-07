@@ -1,46 +1,46 @@
 {
-  "schemaVersion": 1,
-  "id": "boathud",
-  "version": "${version}",
+    "schemaVersion": 1,
+    "id": "boathud",
+    "version": "${version}",
 
-  "name": "BoatHud",
-  "description": "This mod adds a racing style HUD, configurable, for riding a boat, and is designed mostly for racing boats on ice.",
-  "authors": [
-    "hibi"
-  ],
-  "contact": {
-    "sources": "https://github.com/Hibiii/BoatHud",
-    "issues": "https://github.com/Hibiii/BoatHud/issues"
-  },
-
-  "license": "Unlicense",
-  "icon": "assets/boathud/icon.png",
-
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "hibi.boathud.Common"
+    "name": "BoatHud",
+    "description": "This mod adds a racing style HUD, configurable, for riding a boat, and is designed mostly for racing boats on ice.",
+    "authors": [
+        "hibi"
     ],
-    "modmenu": [
-      "hibi.boathud.MenuInteg"
-    ]
-  },
-  "mixins": [
-    "boathud.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": "*",
-    "minecraft": ">=1.17",
-    "java": ">=16",
-    "cloth-config2": ">=5.0"
-  },
-  "custom": {
-    "modmenu": {
-      "links": {
-        "modmenu.github_releases": "https://github.com/Hibiii/BoatHud/releases",
-        "modmenu.discord": "https://discord.gg/Zef3c27dN2"
-      }
+    "contact": {
+        "sources": "https://github.com/Hibiii/BoatHud",
+        "issues": "https://github.com/Hibiii/BoatHud/issues"
+    },
+
+    "license": "Unlicense",
+    "icon": "assets/boathud/icon.png",
+
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "hibi.boathud.Common"
+        ],
+        "modmenu": [
+            "hibi.boathud.MenuInteg"
+        ]
+    },
+    "mixins": [
+        "boathud.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.12.12",
+        "fabric": "*",
+        "minecraft": ">=1.17",
+        "java": ">=17",
+        "cloth-config2": ">=5.0"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.github_releases": "https://github.com/Hibiii/BoatHud/releases",
+                "modmenu.discord": "https://discord.gg/Zef3c27dN2"
+            }
+        }
     }
-  }
 }
