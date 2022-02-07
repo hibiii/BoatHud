@@ -17,26 +17,31 @@ public class MenuInteg implements ModMenuApi {
 				.setTitle(TITLE);
 			ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 			builder.getOrCreateCategory(CAT)
+
 				.addEntry(entryBuilder.startBooleanToggle(ENABLED, Config.enabled)
 					.setDefaultValue(true)
 					.setSaveConsumer(newVal -> Config.enabled = newVal)
 					.build())
+
 				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.extended)
 					.setDefaultValue(true)
 					.setTooltip(TIP_EXTENDED)
 					.setSaveConsumer(newVal -> Config.extended = newVal)
 					.build())
+
 				.addEntry(entryBuilder.startEnumSelector(SPEED_FORMAT, SpeedFormat.class, SpeedFormat.values()[Config.configSpeedType])
 					.setDefaultValue(SpeedFormat.KMPH)
 					.setSaveConsumer(newVal -> Config.setUnit(newVal.ordinal()))
 					.setEnumNameProvider(value -> new TranslatableText("boathud.option.speed_format." + value.toString()))
 					.build())
+
 				.addEntry(entryBuilder.startEnumSelector(BAR_TYPE, BarType.class, BarType.values()[Config.barType])
 					.setDefaultValue(BarType.PACKED)
 					.setTooltip(TIP_BAR, TIP_BAR_PACKED, TIP_BAR_MIXED, TIP_BAR_BLUE)
 					.setSaveConsumer(newVal -> Config.barType = newVal.ordinal())
 					.setEnumNameProvider(value -> new TranslatableText("boathud.option.bar_type." + value.toString()))
 					.build());
+
 			builder.setSavingRunnable(() -> Config.save());
 			return builder.build();
 		};
