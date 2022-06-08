@@ -31,14 +31,16 @@
     "depends": {
         "fabricloader": ">=0.12.12",
         "fabric": "*",
-        "minecraft": ">=1.17",
+        "minecraft": ">=1.19",
         "java": ">=17",
-        "cloth-config2": ">=5.0"
+        "cloth-config2": ">=7.0"
     },
     "custom": {
         "modmenu": {
             "links": {
                 "modmenu.github_releases": "https://github.com/Hibiii/BoatHud/releases",
+                "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/boathud",
+                "modmenu.modrinth": "https://modrinth.com/mod/boathud/",
                 "modmenu.discord": "https://discord.gg/Zef3c27dN2"
             }
         }
