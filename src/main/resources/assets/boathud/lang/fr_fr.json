@@ -1,0 +1,21 @@
+{
+	"modmenu.descriptionTranslation.boathud": "Ce mod ajoute un HUD de style course, configurable, pour piloter un bateau, et est conçu principalement pour les bateaux de course sur glace.",
+	"modmenu.summaryTranslation.boathud": "Naviguez vite avec style !",
+	"boathud.config.title": "Options de BoatHud",
+	"boathud.option.enabled": "Activé",
+	"boathud.option.extended": "HUD étendu",
+	"boathud.option.speed_format": "Unités de vitesse",
+	"boathud.option.speed_format.MS": "m/s",
+	"boathud.option.speed_format.KMPH": "km/h",
+	"boathud.option.speed_format.MPH": "mph",
+	"boathud.option.speed_format.KT": "kt",
+	"boathud.option.bar_type": "Type de barre de vitesse",
+	"boathud.option.bar_type.PACKED": "Eau & Glace compactée",
+	"boathud.option.bar_type.MIXED": "Glaces mixtes",
+	"boathud.option.bar_type.BLUE": "Glace bleue",
+	"boathud.tooltip.extended": "Active le compteur d'accélération et l'affichage des entrées",
+	"boathud.tooltip.bar_type": "Modifier l'affichage et le comportement de la barre de vitesse :",
+	"boathud.tooltip.bar_type.packed": "Eau & Compactée : Idéal pour les basses vitesses.",
+	"boathud.tooltip.bar_type.mixed": "Mixtes: Idéal pour courir sur tout type de glace.",
+	"boathud.tooltip.bar_type.blue": "Bleue: Convient principalement pour les courses sur glace bleue."
+}
