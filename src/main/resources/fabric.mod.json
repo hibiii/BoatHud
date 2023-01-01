@@ -40,8 +40,7 @@
             "links": {
                 "modmenu.github_releases": "https://github.com/Hibiii/BoatHud/releases",
                 "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/boathud",
-                "modmenu.modrinth": "https://modrinth.com/mod/boathud/",
-                "modmenu.discord": "https://discord.gg/Zef3c27dN2"
+                "modmenu.modrinth": "https://modrinth.com/mod/boathud/"
             }
         }
     }
