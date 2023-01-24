@@ -1,0 +1,21 @@
+{
+	"modmenu.descriptionTranslation.boathud": "这个模组增加了一个赛车风格的HUD，可配置，用于乘船，主要是为冰上赛船设计的。",
+	"modmenu.summaryTranslation.boathud": "别具一格地赛船！",
+	"boathud.config.title": "BoatHud选项",
+	"boathud.option.enabled": "启用",
+	"boathud.option.extended": "拓展HUD",
+	"boathud.option.speed_format": "速度单位",
+	"boathud.option.speed_format.MS": "m/s",
+	"boathud.option.speed_format.KMPH": "km/h",
+	"boathud.option.speed_format.MPH": "mph",
+	"boathud.option.speed_format.KT": "kt",
+	"boathud.option.bar_type": "速度栏类型",
+	"boathud.option.bar_type.PACKED": "水与浮冰",
+	"boathud.option.bar_type.MIXED": "混合冰",
+	"boathud.option.bar_type.BLUE": "蓝冰",
+	"boathud.tooltip.extended": "启用加速度计和输入显示",
+	"boathud.tooltip.bar_type": "改变速度条的显示和行为：",
+	"boathud.tooltip.bar_type.packed": "水与浮冰：最适合低速行驶。",
+	"boathud.tooltip.bar_type.mixed": "混合：最适合在任何类型的冰上行驶。",
+	"boathud.tooltip.bar_type.blue": "蓝冰：主要适用于蓝冰竞速。"
+}
