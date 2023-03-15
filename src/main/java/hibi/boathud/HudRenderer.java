@@ -51,18 +51,18 @@ extends DrawableHelper {
 
 		if(Config.extended) {
 			// Overlay texture and bar
-			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
+			DrawableHelper.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
 			this.renderBar(stack, i - 91, this.scaledHeight - 83);
 
 			// Sprites
 			// Left-right
-			this.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-			this.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+			DrawableHelper.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
+			DrawableHelper.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
 			// Ping
 			this.renderPing(stack, i + 75 - nameLen, this.scaledHeight - 65);
 			// Brake-throttle bar
-			this.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
-			this.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
+			DrawableHelper.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
+			DrawableHelper.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
 			
 			// Text
 			// First Row
@@ -74,7 +74,7 @@ extends DrawableHelper {
 
 		} else { // Compact mode
 			// Overlay texture and bar
-			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 50, 182, 20);
+			DrawableHelper.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 50, 182, 20);
 			this.renderBar(stack, i - 91, this.scaledHeight - 83);
 			// Speed and drift angle
 			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
@@ -85,14 +85,14 @@ extends DrawableHelper {
 
 	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, diisplay the speed. */
 	private void renderBar(MatrixStack stack, int x, int y) {
-		this.drawTexture(stack, x, y, 0, BAR_OFF[Config.barType], 182, 5);
+		DrawableHelper.drawTexture(stack, x, y, 0, BAR_OFF[Config.barType], 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
 		if(Common.hudData.speed > MAX_V[Config.barType]) {
 			if(this.client.world.getTime() % 2 == 0) return;
-			this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], 182, 5);
+			DrawableHelper.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], 182, 5);
 			return;
 		}
-		this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+		DrawableHelper.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
 	}
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
@@ -116,7 +116,7 @@ extends DrawableHelper {
 		else {
 			offset = 32;
 		}
-		this.drawTexture(stack, x, y, 246, offset, 10, 8);
+		DrawableHelper.drawTexture(stack, x, y, 246, offset, 10, 8);
 	}
 
 	/** Renders a piece of text centered horizontally on an X coordinate. */
