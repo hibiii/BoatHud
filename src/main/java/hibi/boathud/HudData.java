@@ -16,6 +16,8 @@ public class HudData {
 	public int ping;
 	/** The name of the player. This is incompatible with mods that change which account you're logged in as. */
 	public final String name;
+	/** Controls whether or not the player's inputs are displayed on the HUD - if they are the ones driving it. */
+	public boolean isDriver;
 
 	private double oldSpeed;
 	private final PlayerListEntry listEntry;
@@ -41,5 +43,6 @@ public class HudData {
 		// Trivial miscellanea
 		this.g = (this.speed - this.oldSpeed) * 2.040816327d; // 20 tps / 9.8 m/s²
 		this.ping = this.listEntry.getLatency();
+		this.isDriver = boat.getControllingPassenger() == Common.client.player;
 	}
 }

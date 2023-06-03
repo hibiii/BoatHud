@@ -55,14 +55,17 @@ extends DrawableHelper {
 			this.renderBar(stack, i - 91, this.scaledHeight - 83);
 
 			// Sprites
-			// Left-right
-			DrawableHelper.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-			DrawableHelper.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+			if(Common.hudData.isDriver) {
+				// Left-right
+				DrawableHelper.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
+				DrawableHelper.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+				// Brake-throttle bar
+				DrawableHelper.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
+				DrawableHelper.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
+			}
+
 			// Ping
 			this.renderPing(stack, i + 75 - nameLen, this.scaledHeight - 65);
-			// Brake-throttle bar
-			DrawableHelper.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
-			DrawableHelper.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
 			
 			// Text
 			// First Row
