@@ -3,13 +3,11 @@ package hibi.boathud;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-public class HudRenderer
-extends DrawableHelper {
+public class HudRenderer {
 
 	private static final Identifier WIDGETS_TEXTURE = new Identifier("boathud","textures/widgets.png");
 	private final MinecraftClient client;
@@ -33,7 +31,7 @@ extends DrawableHelper {
 		this.client = client;
 	}
 
-	public void render(MatrixStack stack, float tickDelta) {
+	public void render(DrawContext graphics, float tickDelta) {
 		this.scaledWidth = this.client.getWindow().getScaledWidth();
 		this.scaledHeight = this.client.getWindow().getScaledHeight();
 		int i = this.scaledWidth / 2;
@@ -41,7 +39,6 @@ extends DrawableHelper {
 
 		// Render boilerplate
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-		RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 
@@ -51,55 +48,55 @@ extends DrawableHelper {
 
 		if(Config.extended) {
 			// Overlay texture and bar
-			DrawableHelper.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
-			this.renderBar(stack, i - 91, this.scaledHeight - 83);
+			graphics.drawTexture(WIDGETS_TEXTURE, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
+			this.renderBar(graphics, i - 91, this.scaledHeight - 83);
 
 			// Sprites
 			if(Common.hudData.isDriver) {
 				// Left-right
-				DrawableHelper.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-				DrawableHelper.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+				graphics.drawTexture(WIDGETS_TEXTURE, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
+				graphics.drawTexture(WIDGETS_TEXTURE, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
 				// Brake-throttle bar
-				DrawableHelper.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
-				DrawableHelper.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
+				graphics.drawTexture(WIDGETS_TEXTURE, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
+				graphics.drawTexture(WIDGETS_TEXTURE, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
 			}
 
 			// Ping
-			this.renderPing(stack, i + 75 - nameLen, this.scaledHeight - 65);
+			this.renderPing(graphics, i + 75 - nameLen, this.scaledHeight - 65);
 			
 			// Text
 			// First Row
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
 			// Second Row
-			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFF);
+			graphics.drawTextWithShadow(this.client.textRenderer, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFF);
 
 		} else { // Compact mode
 			// Overlay texture and bar
-			DrawableHelper.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 50, 182, 20);
-			this.renderBar(stack, i - 91, this.scaledHeight - 83);
+			graphics.drawTexture(WIDGETS_TEXTURE, i - 91, this.scaledHeight - 83, 0, 50, 182, 20);
+			this.renderBar(graphics, i - 91, this.scaledHeight - 83);
 			// Speed and drift angle
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 58, this.scaledHeight - 76, 0xFFFFFF);
 		}
 		RenderSystem.disableBlend();
 	}
 
 	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, diisplay the speed. */
-	private void renderBar(MatrixStack stack, int x, int y) {
-		DrawableHelper.drawTexture(stack, x, y, 0, BAR_OFF[Config.barType], 182, 5);
+	private void renderBar(DrawContext graphics, int x, int y) {
+		graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_OFF[Config.barType], 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
 		if(Common.hudData.speed > MAX_V[Config.barType]) {
 			if(this.client.world.getTime() % 2 == 0) return;
-			DrawableHelper.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], 182, 5);
+			graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_ON[Config.barType], 182, 5);
 			return;
 		}
-		DrawableHelper.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+		graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
 	}
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
-	private void renderPing(MatrixStack stack, int x, int y) {
+	private void renderPing(DrawContext graphics, int x, int y) {
 		int offset = 0;
 		if(Common.hudData.ping < 0) {
 			offset = 40;
@@ -119,11 +116,11 @@ extends DrawableHelper {
 		else {
 			offset = 32;
 		}
-		DrawableHelper.drawTexture(stack, x, y, 246, offset, 10, 8);
+		graphics.drawTexture(WIDGETS_TEXTURE, x, y, 246, offset, 10, 8);
 	}
 
 	/** Renders a piece of text centered horizontally on an X coordinate. */
-	private void typeCentered(MatrixStack stack, String text, int centerX, int y, int color) {
-		this.client.textRenderer.drawWithShadow(stack, text, centerX - this.client.textRenderer.getWidth(text) / 2, y, color);
+	private void typeCentered(DrawContext graphics, String text, int centerX, int y, int color) {
+		graphics.drawTextWithShadow(this.client.textRenderer, text, centerX - this.client.textRenderer.getWidth(text) / 2, y, color);
 	}
 }
