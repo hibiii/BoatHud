@@ -9,6 +9,7 @@
         "hibi"
     ],
     "contact": {
+        "homepage": "https://hibiscus.pet/mods/boathud",
         "sources": "https://github.com/Hibiii/BoatHud",
         "issues": "https://github.com/Hibiii/BoatHud/issues"
     },
