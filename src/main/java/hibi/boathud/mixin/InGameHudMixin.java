@@ -15,7 +15,11 @@ import net.minecraft.client.gui.screen.ChatScreen;
 public class InGameHudMixin {
 	@Inject(
 		method = "render",
-		at = @At("TAIL")
+		at = @At(
+			value = "INVOKE",
+			target = "net/minecraft/client/MinecraftClient.getProfiler()Lnet/minecraft/util/profiler/Profiler;",
+			ordinal = 8
+		)
 	)
 	public void render(DrawContext graphics, float tickDelta, CallbackInfo info) {
 		if(Config.enabled && Common.ridingBoat && !(Common.client.currentScreen instanceof ChatScreen)) {
