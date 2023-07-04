@@ -92,7 +92,7 @@ public class HudRenderer {
 			graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_ON[Config.barType], 182, 5);
 			return;
 		}
-		graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+		graphics.drawTexture(WIDGETS_TEXTURE, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType] + 1.5), 5);
 	}
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
