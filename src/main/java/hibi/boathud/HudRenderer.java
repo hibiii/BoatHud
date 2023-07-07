@@ -15,10 +15,10 @@ public class HudRenderer {
 	private int scaledHeight;
 
 	// The index to be used in these scales is the bar type (stored internally as an integer, defined in Config)
-	//                                       Pack  Mix Blue
-	private static final double[] MIN_V =   {  0d, 10d, 40d}; // Minimum display speed (m/s)
-	private static final double[] MAX_V =   { 40d, 70d, 70d}; // Maximum display speed (m/s)
-	private static final double[] SCALE_V = {4.5d,  3d,  6d}; // Pixels for 1 unit of speed (px*s/m) (BarWidth / (VMax - VMin))
+	//                                        Pack     Mixed      Blue
+	private static final double[] MIN_V =   {   0d,       8d,      40d}; // Minimum display speed (m/s)
+	private static final double[] MAX_V =   {  40d,      70d,      70d}; // Maximum display speed (m/s)
+	private static final double[] SCALE_V = {4.55d, 182d/62d, 182d/30d}; // Pixels for 1 unit of speed (px*s/m) (BarWidth / (VMax - VMin))
 	// V coordinates for each bar type in the texture file
 	//                                    Pk Mix Blu
 	private static final int[] BAR_OFF = { 0, 10, 20};
