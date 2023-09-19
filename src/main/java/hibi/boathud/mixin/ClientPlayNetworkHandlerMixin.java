@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import hibi.boathud.Common;
 import hibi.boathud.HudData;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
@@ -18,7 +18,7 @@ import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
 public class ClientPlayNetworkHandlerMixin {
 
 	@Shadow
-	private @Final MinecraftClient client;
+	private ClientWorld world;
 
 	@Inject(
 		method = "onEntityPassengersSet(Lnet/minecraft/network/packet/s2c/play/EntityPassengersSetS2CPacket;)V",
@@ -29,7 +29,7 @@ public class ClientPlayNetworkHandlerMixin {
 		)
 	)
 	private void checkBoatEntry(EntityPassengersSetS2CPacket packet, CallbackInfo info) {
-		if(!(Common.client.world.getEntityById(packet.getId()) instanceof BoatEntity)) return;
+		if(!(world.getEntityById(packet.getId()) instanceof BoatEntity)) return;
 		Common.ridingBoat = true;
 		Common.hudData = new HudData();
 	}
