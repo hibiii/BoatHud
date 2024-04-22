@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Properties;
 
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -35,33 +36,36 @@ public class Config {
 	/** Setting a value that's not between 0 and 2 *will* cause an IndexOutOfBounds */
 	public static int barType = 0;
 
-	private static File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "boathud.properties");
-
 	private Config() {}
 
 	/**
 	 * Load the config from disk and into memory. Ideally should be run only once. Wrong and missing settings are silently reset to defaults.
 	 */
 	public static void load() {
+		File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "boathud.properties");
+		if(!file.exists()) {
+			return;
+		}
 		try {
-			if(file.exists()) {
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				String line = br.readLine();
-				do {
-					if(line.startsWith("enabled "))
-						enabled = Boolean.parseBoolean(line.substring(8));
-					if(line.startsWith("extended "))
-						extended = Boolean.parseBoolean(line.substring(9));
-					if(line.startsWith("barType "))
-						barType = Integer.parseInt(line.substring(8));
-					if(line.startsWith("speedUnit "))
-						setUnit(Integer.parseInt(line.substring(10)));
-					line = br.readLine();
-				} while (line != null);
-				br.close();
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			Properties prop = new Properties();
+			prop.load(br);
+			br.close();
+			if(prop.get("enabled") instanceof String val) {
+				enabled = Boolean.parseBoolean(val);
+			}
+			if(prop.get("extended") instanceof String val) {
+				extended = Boolean.parseBoolean(val);
+			}
+			if(prop.get("barType") instanceof String val) {
+				barType = Integer.parseInt(val);
+			}
+			if(prop.get("speedUnit") instanceof String val) {
+				setUnit(Integer.parseInt(val));
 			}
 		}
 		catch (Exception e) {
+			// Empty catch block
 		}
 		// Sanity check
 		if(barType > 2 || barType < 0) {
@@ -73,6 +77,7 @@ public class Config {
 	 * Save the config from memory and onto disk. Ideally, should only be run when the settings are changed.
 	 */
 	public static void save() {
+		File file = new File(FabricLoader.getInstance().getConfigDir().toFile(), "boathud.properties");
 		try {
 			FileWriter writer = new FileWriter(file);
 			writer.write("enabled " + Boolean.toString(enabled) + "\n");
