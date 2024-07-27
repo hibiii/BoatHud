@@ -8,7 +8,8 @@
 			"name": "BoatHud",
 			"description": "This mod adds a racing style HUD, configurable, for riding a boat, and is designed mostly for racing boats on ice.",
 			"contributors": {
-				"hibi": "Owner"
+				"hibi": "Owner",
+				"LordEnder_Kitty": "Contributor"
 			},
 			"contact": {
 				"homepage": "https://hibiscus.pet/mods/boathud",
@@ -28,7 +29,7 @@
 			},
 			{
 				"id": "minecraft",
-				"versions": ">=1.20.2"
+				"versions": ">=1.21"
 			},
 			{
 				"id": "cloth-config2",

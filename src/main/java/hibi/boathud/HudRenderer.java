@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class HudRenderer {
 
-	private static final Identifier WIDGETS_TEXTURE = new Identifier("boathud","textures/widgets.png");
+	private static final Identifier WIDGETS_TEXTURE = Identifier.of("boathud","textures/widgets.png");
 	private final MinecraftClient client;
 	private int scaledWidth;
 	private int scaledHeight;
