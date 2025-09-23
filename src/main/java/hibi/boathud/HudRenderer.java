@@ -4,12 +4,13 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class HudRenderer {
 
-	private static final Identifier WIDGETS_TEXTURE = new Identifier("boathud","textures/widgets.png");
+	private static final Identifier WIDGETS_TEXTURE = Identifier.of("boathud","textures/widgets.png");
 	private final MinecraftClient client;
 	private int scaledWidth;
 	private int scaledHeight;
@@ -31,7 +32,7 @@ public class HudRenderer {
 		this.client = client;
 	}
 
-	public void render(DrawContext graphics, float tickDelta) {
+	public void render(DrawContext graphics, RenderTickCounter counter) {
 		this.scaledWidth = this.client.getWindow().getScaledWidth();
 		this.scaledHeight = this.client.getWindow().getScaledHeight();
 		int i = this.scaledWidth / 2;
@@ -44,7 +45,7 @@ public class HudRenderer {
 
 		// Lerping the displayed speed with the actual speed against how far we are into the tick not only is mostly accurate,
 		// but gives the impression that it's being updated faster than 20 hz (which it isn't)
-		this.displayedSpeed = MathHelper.lerp(tickDelta, this.displayedSpeed, Common.hudData.speed);
+		this.displayedSpeed = MathHelper.lerp(counter.getTickDelta(false), this.displayedSpeed, Common.hudData.speed);
 
 		if(Config.extended) {
 			// Overlay texture and bar

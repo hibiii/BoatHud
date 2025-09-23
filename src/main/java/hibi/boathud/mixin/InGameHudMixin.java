@@ -10,6 +10,7 @@ import hibi.boathud.Config;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.render.RenderTickCounter;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
@@ -17,13 +18,13 @@ public class InGameHudMixin {
 		method = "render",
 		at = @At(
 			value = "INVOKE",
-			target = "net/minecraft/client/MinecraftClient.getProfiler()Lnet/minecraft/util/profiler/Profiler;",
-			ordinal = 8
+			target = "Lnet/minecraft/client/gui/LayeredDrawer;render(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V",
+			shift = At.Shift.AFTER
 		)
 	)
-	public void render(DrawContext graphics, float tickDelta, CallbackInfo info) {
+	public void render(DrawContext graphics, RenderTickCounter counter, CallbackInfo info) {
 		if(Config.enabled && Common.ridingBoat && !(Common.client.currentScreen instanceof ChatScreen)) {
-			Common.hudRenderer.render(graphics, tickDelta);
+			Common.hudRenderer.render(graphics, counter);
 		}
 	}
 }
