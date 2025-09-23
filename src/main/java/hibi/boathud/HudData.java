@@ -23,7 +23,7 @@ public class HudData {
 	private final PlayerListEntry listEntry;
 
 	public HudData(){
-		this.name = Common.client.player.getEntityName();
+		this.name = Common.client.player.getName().getString();
 		this.listEntry = Common.client.getNetworkHandler().getPlayerListEntry(Common.client.player.getUuid());
 	}
 
