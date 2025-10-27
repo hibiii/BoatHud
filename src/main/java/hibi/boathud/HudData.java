@@ -1,7 +1,7 @@
 package hibi.boathud;
 
 import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.util.math.Vec3d;
 
 public class HudData {
@@ -29,7 +29,7 @@ public class HudData {
 
 	/** Updates the data. Assumes player is in a boat. Do not call unless you are absolutely sure the player is in a boat. */
 	public void update() {
-		BoatEntity boat = (BoatEntity)Common.client.player.getVehicle();
+		AbstractBoatEntity boat = (AbstractBoatEntity)Common.client.player.getVehicle();
 		// Ignore vertical speed
 		Vec3d velocity = boat.getVelocity().multiply(1, 0, 1);
 		this.oldSpeed = this.speed;

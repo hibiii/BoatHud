@@ -28,11 +28,11 @@
 			},
 			{
 				"id": "minecraft",
-				"versions": "1.21.1"
+				"versions": ">=1.21.3"
 			},
 			{
 				"id": "cloth-config2",
-				"versions": ">=15.0.0"
+				"versions": ">=16.0.0"
 			}
 		]
 	},

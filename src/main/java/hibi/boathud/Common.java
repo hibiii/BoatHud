@@ -3,7 +3,7 @@ package hibi.boathud;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 
 public class Common implements ClientModInitializer {
 
@@ -19,7 +19,7 @@ public class Common implements ClientModInitializer {
 		Config.load();
 		ClientTickEvents.END_WORLD_TICK.register(clientWorld -> {
 			if(client.player == null) return;
-			if(client.player.getVehicle() instanceof BoatEntity boat && boat.getFirstPassenger() == client.player) {
+			if(client.player.getVehicle() instanceof AbstractBoatEntity boat && boat.getFirstPassenger() == client.player) {
 				hudData.update();
 			}
 			else {
