@@ -1,8 +1,8 @@
 package hibi.boathud;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -27,27 +27,27 @@ public class HudRenderer {
 	}
 
 	public void render(DrawContext graphics, RenderTickCounter counter) {
-		this.scaledWidth = this.client.getWindow().getScaledWidth();
-		this.scaledHeight = this.client.getWindow().getScaledHeight();
+		this.scaledWidth = graphics.getScaledWindowWidth();
+		this.scaledHeight = graphics.getScaledWindowHeight();
 		int i = this.scaledWidth / 2;
 		int nameLen = this.client.textRenderer.getWidth(Common.hudData.name);
 
 		// Lerping the displayed speed with the actual speed against how far we are into the tick not only is mostly accurate,
 		// but gives the impression that it's being updated faster than 20 hz (which it isn't)
-		this.displayedSpeed = MathHelper.lerp(counter.getTickDelta(false), this.displayedSpeed, Common.hudData.speed);
+		this.displayedSpeed = MathHelper.lerp(counter.getTickProgress(true), this.displayedSpeed, Common.hudData.speed);
 
 		if(Config.extended) {
 			// Overlay texture and bar
-			graphics.drawGuiTexture(RenderLayer::getGuiTextured, BACKGROUND_EXTENDED, i - 91, this.scaledHeight - 83, 182, 33);
+			graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, BACKGROUND_EXTENDED, i - 91, this.scaledHeight - 83, 182, 33);
 			this.renderBar(graphics, i - 91, this.scaledHeight - 83);
 
 			// Sprites
 			if(Common.hudData.isDriver) {
-				graphics.drawGuiTexture(RenderLayer::getGuiTextured, this.client.options.leftKey.isPressed()? LEFT_LIT : LEFT_UNLIT, i - 86, this.scaledHeight - 65, 17, 8);
-				graphics.drawGuiTexture(RenderLayer::getGuiTextured, this.client.options.rightKey.isPressed()? RIGHT_LIT : RIGHT_UNLIT, i - 63, this.scaledHeight - 65, 17, 8);
+				graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, this.client.options.leftKey.isPressed()? LEFT_LIT : LEFT_UNLIT, i - 86, this.scaledHeight - 65, 17, 8);
+				graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, this.client.options.rightKey.isPressed()? RIGHT_LIT : RIGHT_UNLIT, i - 63, this.scaledHeight - 65, 17, 8);
 				// Brake-throttle bar
-				graphics.drawGuiTexture(RenderLayer::getGuiTextured, this.client.options.forwardKey.isPressed()? FORWARD_LIT : FORWARD_UNLIT, i, this.scaledHeight - 55, 61, 5);
-				graphics.drawGuiTexture(RenderLayer::getGuiTextured, this.client.options.backKey.isPressed()? BACKWARD_LIT : BACKWARD_UNLIT, i - 61, this.scaledHeight - 55, 61, 5);
+				graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, this.client.options.forwardKey.isPressed()? FORWARD_LIT : FORWARD_UNLIT, i, this.scaledHeight - 55, 61, 5);
+				graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, this.client.options.backKey.isPressed()? BACKWARD_LIT : BACKWARD_UNLIT, i - 61, this.scaledHeight - 55, 61, 5);
 			}
 
 			// Ping
@@ -55,32 +55,32 @@ public class HudRenderer {
 			
 			// Text
 			// First Row
-			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(graphics, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFFFF);
+			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, 0xFFFFFFFF);
+			this.typeCentered(graphics, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFFFF);
 			// Second Row
-			graphics.drawTextWithShadow(this.client.textRenderer, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFF);
+			graphics.drawTextWithShadow(this.client.textRenderer, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFFFF);
 
 		} else { // Compact mode
 			// Overlay texture and bar
-			graphics.drawGuiTexture(RenderLayer::getGuiTextured, BACKGROUND_COMPACT, i - 91, this.scaledHeight - 83, 182, 20);
+			graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, BACKGROUND_COMPACT, i - 91, this.scaledHeight - 83, 182, 20);
 			this.renderBar(graphics, i - 91, this.scaledHeight - 83);
 			// Speed and drift angle
-			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(graphics, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFFFF);
+			this.typeCentered(graphics, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 58, this.scaledHeight - 76, 0xFFFFFFFF);
 		}
 	}
 
 	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, diisplay the speed. */
 	private void renderBar(DrawContext graphics, int x, int y) {
-		graphics.drawGuiTexture(RenderLayer::getGuiTextured, BAR_OFF[Config.barType], x, y, 182, 5);
+		graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, BAR_OFF[Config.barType], x, y, 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
 		if(Common.hudData.speed > MAX_V[Config.barType]) {
 			if(this.client.world.getTime() % 2 == 0) return;
-			graphics.drawGuiTexture(RenderLayer::getGuiTextured, BAR_ON[Config.barType], x, y, 182, 5);
+			graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, BAR_ON[Config.barType], x, y, 182, 5);
 			return;
 		}
-		graphics.drawGuiTexture(RenderLayer::getGuiTextured, BAR_ON[Config.barType], 182, 5, 0, 0, x, y, (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+		graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, BAR_ON[Config.barType], 182, 5, 0, 0, x, y, (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
 	}
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
@@ -104,7 +104,7 @@ public class HudRenderer {
 		else {
 			bar = PING_1;
 		}
-		graphics.drawGuiTexture(RenderLayer::getGuiTextured, bar, x, y, 10, 8);
+		graphics.drawGuiTexture(RenderPipelines.GUI_TEXTURED, bar, x, y, 10, 8);
 	}
 
 	/** Renders a piece of text centered horizontally on an X coordinate. */

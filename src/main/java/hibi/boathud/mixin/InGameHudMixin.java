@@ -15,12 +15,8 @@ import net.minecraft.client.render.RenderTickCounter;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
 	@Inject(
-		method = "render",
-		at = @At(
-			value = "INVOKE",
-			target = "Lnet/minecraft/client/gui/LayeredDrawer;render(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V",
-			shift = At.Shift.AFTER
-		)
+		method = "renderMainHud",
+		at = @At("TAIL")
 	)
 	public void render(DrawContext graphics, RenderTickCounter counter, CallbackInfo info) {
 		if(Config.enabled && Common.ridingBoat && !(Common.client.currentScreen instanceof ChatScreen)) {

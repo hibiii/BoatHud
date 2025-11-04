@@ -28,7 +28,7 @@
 			},
 			{
 				"id": "minecraft",
-				"versions": ">=1.21.3"
+				"versions": ">=1.21.6"
 			},
 			{
 				"id": "cloth-config2",
