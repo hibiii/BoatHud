@@ -10,7 +10,7 @@ import hibi.boathud.Common;
 import hibi.boathud.HudData;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
 
 @Mixin(ClientPlayNetworkHandler.class)
@@ -28,7 +28,7 @@ public class ClientPlayNetworkHandlerMixin {
 		)
 	)
 	private void checkBoatEntry(EntityPassengersSetS2CPacket packet, CallbackInfo info) {
-		if(!(world.getEntityById(packet.getEntityId()) instanceof BoatEntity)) return;
+		if(!(world.getEntityById(packet.getEntityId()) instanceof AbstractBoatEntity)) return;
 		Common.ridingBoat = true;
 		Common.hudData = new HudData();
 	}
