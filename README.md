@@ -5,7 +5,7 @@ Licensed under Unlicense.
 
 ![BoatHud screenshot in an iceboat racetrack](.github/screenshot.png)
 
-This HUD displays some information useful for boating such as drift angle and speed.
+This HUD displays some information useful for boating such as drift angle and speed, and additionally can also drift the camera to make boating smoother.
 
 This mod needs [Cloth Config](https://github.com/shedaniel/cloth-config).
 To configure, you need [Mod Menu](https://github.com/TerraformersMC/ModMenu/).
