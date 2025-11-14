@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.util.Properties;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Mth;
 
 public class Config {
 	
@@ -89,8 +90,8 @@ public class Config {
 		if(barType > 2 || barType < 0) {
 			barType = 0;
 		}
-		cameraAggressiveness = Math.clamp(cameraAggressiveness, 0.2f, 3.5f);
-		cameraSmoothing = Math.clamp(cameraSmoothing, 0f, 0.9f);
+		cameraAggressiveness = Mth.clamp(cameraAggressiveness, 0.2f, 3.5f);
+		cameraSmoothing = Mth.clamp(cameraSmoothing, 0f, 0.9f);
 	}
 
 	/**
