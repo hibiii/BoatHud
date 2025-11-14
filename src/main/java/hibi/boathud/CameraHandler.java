@@ -15,6 +15,8 @@ public class CameraHandler {
         var lerpProg = (float) Math.min(velocity.multiply(1, 0, 1).length() / Config.cameraAggressiveness, 1);
         var newYRot = Mth.rotLerp(lerpProg, boatYaw, velocityAngle);
 
+        newYRot = Mth.rotLerp(Config.cameraSmoothing, newYRot, player.getYRot());
+
         player.setYRot(newYRot);
     }
 }

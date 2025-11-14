@@ -52,6 +52,13 @@ public class MenuInteg implements ModMenuApi {
 					.setTooltip(TIP_CAMERA_AGGRESSIVENESS)
 					.setMin(4).setMax(70)
 					.setSaveConsumer(newVal -> Config.cameraAggressiveness = newVal / 20)
+					.build())
+				
+				.addEntry(entryBuilder.startFloatField(CAMERA_SMOOTHING, Config.cameraSmoothing / 0.009f)
+					.setDefaultValue(50)
+					.setTooltip(TIP_CAMERA_SMOOTHING)
+					.setMin(0).setMax(100)
+					.setSaveConsumer(newVal -> Config.cameraSmoothing = newVal * 0.009f)
 					.build());
 
 			builder.setSavingRunnable(() -> Config.save());
@@ -73,11 +80,13 @@ public class MenuInteg implements ModMenuApi {
 		EXTENDED = Component.translatable("boathud.option.extended"),
 		CAMERA_CONTROL = Component.translatable("boathud.option.camera_control"),
 		CAMERA_AGGRESSIVENESS = Component.translatable("boathud.option.camera_aggressiveness"),
+		CAMERA_SMOOTHING = Component.translatable("boathud.option.camera_smoothing"),
 		BAR_TYPE = Component.translatable("boathud.option.bar_type"),
 		SPEED_FORMAT = Component.translatable("boathud.option.speed_format"),
 		TIP_EXTENDED = Component.translatable("boathud.tooltip.extended"),
 		TIP_CAMERA_CONTROL = Component.translatable("boathud.tooltip.camera_control"),
 		TIP_CAMERA_AGGRESSIVENESS = Component.translatable("boathud.tooltip.camera_aggressiveness"),
+		TIP_CAMERA_SMOOTHING = Component.translatable("boathud.tooltip.camera_smoothing"),
 		TIP_BAR = Component.translatable("boathud.tooltip.bar_type"),
 		TIP_BAR_PACKED = Component.translatable("boathud.tooltip.bar_type.packed"),
 		TIP_BAR_MIXED = Component.translatable("boathud.tooltip.bar_type.mixed"),

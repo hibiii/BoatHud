@@ -42,6 +42,8 @@ public class Config {
 	/** Controls from which speed the camera is the most aggressive in look-ahead, or when it completely ignores the boat's rotation (m/t). */
 	public static float cameraAggressiveness = 3f;
 
+	/** Controls how strongly the camera is moved (higher means more inertia). */
+	public static float cameraSmoothing = 0.45f;
 
 	private Config() {}
 
@@ -76,6 +78,9 @@ public class Config {
 			if(prop.get("cameraAggressiveness") instanceof String val) {
 				cameraAggressiveness = Float.parseFloat(val);
 			}
+			if(prop.get("cameraSmoothing") instanceof String val) {
+				cameraSmoothing = Float.parseFloat(val);
+			}
 		}
 		catch (Exception e) {
 			// Empty catch block
@@ -84,6 +89,8 @@ public class Config {
 		if(barType > 2 || barType < 0) {
 			barType = 0;
 		}
+		cameraAggressiveness = Math.clamp(cameraAggressiveness, 0.2f, 3.5f);
+		cameraSmoothing = Math.clamp(cameraSmoothing, 0f, 0.9f);
 	}
 
 	/**
@@ -99,6 +106,7 @@ public class Config {
 			writer.write("speedUnit " + Integer.toString(configSpeedType) + "\n");
 			writer.write("cameraControl " + Boolean.toString(cameraControl) + "\n");
 			writer.write("cameraAggressiveness " + Float.toString(cameraAggressiveness) + "\n");
+			writer.write("cameraSmoothing " + Float.toString(cameraSmoothing) + "\n");
 			writer.close();
 		}
 		catch (Exception e) {
