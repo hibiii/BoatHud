@@ -36,6 +36,9 @@ public class Config {
 	/** Setting a value that's not between 0 and 2 *will* cause an IndexOutOfBounds */
 	public static int barType = 0;
 
+	/** Enables speed-based camera control, akin to Boat Cam. */
+	public static boolean cameraControl = false;
+
 	private Config() {}
 
 	/**
@@ -63,6 +66,9 @@ public class Config {
 			if(prop.get("speedUnit") instanceof String val) {
 				setUnit(Integer.parseInt(val));
 			}
+			if(prop.get("cameraControl") instanceof String val) {
+				cameraControl = Boolean.parseBoolean(val);
+			}
 		}
 		catch (Exception e) {
 			// Empty catch block
@@ -84,6 +90,7 @@ public class Config {
 			writer.write("extended " + Boolean.toString(extended) + "\n");
 			writer.write("barType " + Integer.toString(barType) + "\n");
 			writer.write("speedUnit " + Integer.toString(configSpeedType) + "\n");
+			writer.write("cameraControl " + Boolean.toString(cameraControl) + "\n");
 			writer.close();
 		}
 		catch (Exception e) {

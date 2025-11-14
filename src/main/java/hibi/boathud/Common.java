@@ -33,6 +33,7 @@ public class Common implements ClientModInitializer {
 		});
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(client.player == null) return;
+			if(!Config.cameraControl) return;
 			if(client.player.getVehicle() instanceof AbstractBoat boat && boat.getControllingPassenger() == client.player) {
 				CameraHandler.tick(boat, client.player);
 			}

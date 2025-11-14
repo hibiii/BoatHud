@@ -39,6 +39,12 @@ public class MenuInteg implements ModMenuApi {
 					.setTooltip(TIP_BAR, TIP_BAR_PACKED, TIP_BAR_MIXED, TIP_BAR_BLUE)
 					.setSaveConsumer(newVal -> Config.barType = newVal.ordinal())
 					.setEnumNameProvider(value -> Component.translatable("boathud.option.bar_type." + value.toString()))
+					.build())
+
+				.addEntry(entryBuilder.startBooleanToggle(CAMERA_CONTROL, Config.cameraControl)
+					.setDefaultValue(true)
+					.setTooltip(TIP_CAMERA_CONTROL)
+					.setSaveConsumer(newVal -> Config.cameraControl = newVal)
 					.build());
 
 			builder.setSavingRunnable(() -> Config.save());
@@ -58,9 +64,11 @@ public class MenuInteg implements ModMenuApi {
 		CAT = Component.translatable("boathud.config.cat"),
 		ENABLED = Component.translatable("boathud.option.enabled"),
 		EXTENDED = Component.translatable("boathud.option.extended"),
+		CAMERA_CONTROL = Component.translatable("boathud.option.camera_control"),
 		BAR_TYPE = Component.translatable("boathud.option.bar_type"),
 		SPEED_FORMAT = Component.translatable("boathud.option.speed_format"),
 		TIP_EXTENDED = Component.translatable("boathud.tooltip.extended"),
+		TIP_CAMERA_CONTROL = Component.translatable("boathud.tooltip.camera_control"),
 		TIP_BAR = Component.translatable("boathud.tooltip.bar_type"),
 		TIP_BAR_PACKED = Component.translatable("boathud.tooltip.bar_type.packed"),
 		TIP_BAR_MIXED = Component.translatable("boathud.tooltip.bar_type.mixed"),
