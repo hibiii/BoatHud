@@ -5,6 +5,7 @@
 	"boathud.option.enabled": "Enabled",
 	"boathud.option.extended": "Extended HUD",
 	"boathud.option.camera_control": "Enable look-ahead",
+	"boathud.option.camera_aggressiveness": "Look-ahead aggressiveness",
 	"boathud.option.speed_format": "Speed units",
 	"boathud.option.speed_format.MS": "m/s",
 	"boathud.option.speed_format.KMPH": "km/h",
@@ -19,5 +20,6 @@
 	"boathud.tooltip.bar_type.packed": "Water & Packed: Best for low speeds.",
 	"boathud.tooltip.bar_type.mixed": "Mixed: Best for running on any kind of ice.",
 	"boathud.tooltip.bar_type.blue": "Blue: Suitable mostly for blue ice racing.",
-	"boathud.tooltip.camera_control": "The player automatically looks in the direction the boat is going."
+	"boathud.tooltip.camera_control": "The player automatically looks in the direction the boat is going.",
+	"boathud.tooltip.camera_aggressiveness": "The speed at which the camera starts completely ignoring the boat's orientation (in m/s, lower is more aggressive)."
 }

@@ -39,6 +39,10 @@ public class Config {
 	/** Enables speed-based camera control, akin to Boat Cam. */
 	public static boolean cameraControl = false;
 
+	/** Controls from which speed the camera is the most aggressive in look-ahead, or when it completely ignores the boat's rotation (m/t). */
+	public static float cameraAggressiveness = 3f;
+
+
 	private Config() {}
 
 	/**
@@ -69,6 +73,9 @@ public class Config {
 			if(prop.get("cameraControl") instanceof String val) {
 				cameraControl = Boolean.parseBoolean(val);
 			}
+			if(prop.get("cameraAggressiveness") instanceof String val) {
+				cameraAggressiveness = Float.parseFloat(val);
+			}
 		}
 		catch (Exception e) {
 			// Empty catch block
@@ -91,6 +98,7 @@ public class Config {
 			writer.write("barType " + Integer.toString(barType) + "\n");
 			writer.write("speedUnit " + Integer.toString(configSpeedType) + "\n");
 			writer.write("cameraControl " + Boolean.toString(cameraControl) + "\n");
+			writer.write("cameraAggressiveness " + Float.toString(cameraAggressiveness) + "\n");
 			writer.close();
 		}
 		catch (Exception e) {

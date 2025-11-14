@@ -12,7 +12,7 @@ public class CameraHandler {
         var velocityAngle = (float) Math.toDegrees(Math.atan2(velocity.z, velocity.x)) - 90f;
         if (Float.isNaN(velocityAngle)) velocityAngle = boatYaw;
         
-        var lerpProg = (float) velocity.multiply(1, 0, 1).length() / 3.5f;
+        var lerpProg = (float) Math.min(velocity.multiply(1, 0, 1).length() / Config.cameraAggressiveness, 1);
         var newYRot = Mth.rotLerp(lerpProg, boatYaw, velocityAngle);
 
         player.setYRot(newYRot);
