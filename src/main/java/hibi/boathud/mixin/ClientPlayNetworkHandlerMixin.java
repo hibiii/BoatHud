@@ -8,27 +8,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import hibi.boathud.Common;
 import hibi.boathud.HudData;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.entity.vehicle.AbstractBoatEntity;
-import net.minecraft.network.packet.s2c.play.EntityPassengersSetS2CPacket;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.world.entity.vehicle.AbstractBoat;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public class ClientPlayNetworkHandlerMixin {
 
 	@Shadow
-	private ClientWorld world;
+	private ClientLevel level;
 
 	@Inject(
-		method = "onEntityPassengersSet(Lnet/minecraft/network/packet/s2c/play/EntityPassengersSetS2CPacket;)V",
+		method = "handleSetEntityPassengersPacket(Lnet/minecraft/network/protocol/game/ClientboundSetPassengersPacket;)V",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/client/gui/hud/InGameHud;setOverlayMessage(Lnet/minecraft/text/Text;Z)V",
+			target = "Lnet/minecraft/client/gui/Gui;setOverlayMessage(Lnet/minecraft/network/chat/Component;Z)V",
 			shift = At.Shift.AFTER
 		)
 	)
-	private void checkBoatEntry(EntityPassengersSetS2CPacket packet, CallbackInfo info) {
-		if(!(world.getEntityById(packet.getEntityId()) instanceof AbstractBoatEntity)) return;
+	private void checkBoatEntry(ClientboundSetPassengersPacket packet, CallbackInfo info) {
+		if(!(level.getEntity(packet.getVehicle()) instanceof AbstractBoat)) return;
 		Common.ridingBoat = true;
 		Common.hudData = new HudData();
 	}
