@@ -1,5 +1,7 @@
 package hibi.boathud;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.phys.Vec3;
@@ -9,40 +11,62 @@ public class HudData {
 	public double speed;
 	/** The current acceleration in g. */
 	public double g;
-	/** The current drift angle in degrees, the angle difference between the velocity and where the boat is facing. */
+	/** The current drift angle in degrees. */
 	public double driftAngle;
-
-	/** The curerent ping of the player, just for bookkeeping. */
-	public int ping;
-	/** The name of the player. This is incompatible with mods that change which account you're logged in as. */
-	public final String name;
-	/** Controls whether or not the player's inputs are displayed on the HUD - if they are the ones driving it. */
+	/** The current ping of the player. -1 means unknown. */
+	public int ping = -1;
+	/** The name of the player. */
+	public String name = "";
+	/** Controls whether or not the player's inputs are displayed on the HUD. */
 	public boolean isDriver;
 
-	private double oldSpeed;
-	private final PlayerInfo listEntry;
+    public HudData() {
+		Minecraft client = Common.client;
 
-	public HudData(){
-		this.name = Common.client.player.getName().getString();
-		this.listEntry = Common.client.getConnection().getPlayerInfo(Common.client.player.getUUID());
+		if (client.player != null) {
+			this.name = client.player.getName().getString();
+		}
 	}
 
-	/** Updates the data. Assumes player is in a boat. Do not call unless you are absolutely sure the player is in a boat. */
+	/** Updates the data. Safe to call every tick. */
 	public void update() {
-		AbstractBoat boat = (AbstractBoat)Common.client.player.getVehicle();
-		// Ignore vertical speed
+		Minecraft client = Common.client;
+
+		if (client == null || client.player == null) {
+			return;
+		}
+		if (!(client.player.getVehicle() instanceof AbstractBoat boat)) {
+			return;
+		}
+
+		this.name = client.player.getName().getString();
+
 		Vec3 velocity = boat.getDeltaMovement().multiply(1, 0, 1);
-		this.oldSpeed = this.speed;
-		this.speed = velocity.length() * 20d; // Speed in Minecraft's engine is in meters/tick.
 
-		// a̅•b̅ = |a̅||b̅|cos ϑ
-		// ϑ = acos [(a̅•b̅) / (|a̅||b̅|)]
-		this.driftAngle = Math.toDegrees(Math.acos(velocity.dot(boat.getLookAngle()) / velocity.length() * boat.getLookAngle().length()));
-		if(Double.isNaN(this.driftAngle)) this.driftAngle = 0; // Div by 0
+        double oldSpeed = this.speed;
+		this.speed = velocity.length() * 20d;
 
-		// Trivial miscellanea
-		this.g = (this.speed - this.oldSpeed) * 2.040816327d; // 20 tps / 9.8 m/s²
-		this.ping = this.listEntry.getLatency();
-		this.isDriver = boat.getControllingPassenger() == Common.client.player;
+		Vec3 look = boat.getLookAngle().multiply(1, 0, 1);
+
+		double velocityLength = velocity.length();
+		double lookLength = look.length();
+
+		if (velocityLength == 0 || lookLength == 0) {
+			this.driftAngle = 0;
+		} else {
+			double cos = velocity.dot(look) / (velocityLength * lookLength);
+			cos = Math.clamp(cos, -1.0d, 1.0d);
+			this.driftAngle = Math.toDegrees(Math.acos(cos));
+		}
+
+		this.g = (this.speed - oldSpeed) * 2.040816327d;
+
+		ClientPacketListener connection = client.getConnection();
+		PlayerInfo playerInfo = connection == null
+				? null
+				: connection.getPlayerInfo(client.player.getUUID());
+
+		this.ping = playerInfo == null ? -1 : playerInfo.getLatency();
+		this.isDriver = boat.getControllingPassenger() == client.player;
 	}
 }

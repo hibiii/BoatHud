@@ -75,8 +75,9 @@ public class HudRenderer {
 	private void renderBar(GuiGraphicsExtractor graphics, int x, int y) {
 		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BAR_OFF[Config.barType], x, y, 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
-		if(Common.hudData.speed > MAX_V[Config.barType]) {
-			if(this.client.level.getGameTime() % 2 == 0) return;
+		if (Common.hudData.speed > MAX_V[Config.barType]) {
+			long gameTime = this.client.level == null ? 0L : this.client.level.getGameTime();
+			if (gameTime % 2 == 0) return;
 			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BAR_ON[Config.barType], x, y, 182, 5);
 			return;
 		}
@@ -85,7 +86,7 @@ public class HudRenderer {
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
 	private void renderPing(GuiGraphicsExtractor graphics, int x, int y) {
-		Identifier bar = PING_5;
+		Identifier bar;
 		if(Common.hudData.ping < 0) {
 			bar = PING_UNKNOWN;
 		}
