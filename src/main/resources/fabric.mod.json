@@ -31,8 +31,8 @@
     ],
     "depends": {
         "fabric-api": "*",
-        "minecraft": ">=26.1",
-        "cloth-config2": ">=26.1.0"
+        "minecraft": ">=26.2",
+        "cloth-config2": ">=26.2.0"
     },
     "custom": {
         "modmenu": {
